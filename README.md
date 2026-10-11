@@ -5,7 +5,9 @@ Final-year project. Full plan, reasoning, and honest results/limitations are in
 
 ## How to run everything
 
-### 1. Phase 1 - train/regenerate the ML models (Python)
+The step numbers below show startup order; phase labels refer to the project phases.
+
+### 1. Train/regenerate the ML models (Phase 1, Python)
 
 ```bash
 pip install -r requirements.txt
@@ -16,14 +18,14 @@ python src/driver_behaviour.py     # engineers features + K-Means clustering
 python src/combined_inference.py   # sanity-checks all 3 models together, writes a sample output
 ```
 
-### 2. Phase 3 - ML service (Python/FastAPI)
+### 2. Start the ML service (Phase 3, Python/FastAPI)
 
 ```bash
 cd ml_service
 uvicorn main:app --reload --port 8000
 ```
 
-### 3. Phase 2/3 - backend (Node/Express)
+### 3. Start the backend (Phase 2 LLM integration + Phase 3 orchestration, Node/Express)
 
 ```bash
 cd backend
@@ -32,7 +34,7 @@ cp .env.example .env   # fill in ANTHROPIC_API_KEY for live LLM reports (optiona
 npm start
 ```
 
-### 4. Phase 3 - frontend (React/Vite)
+### 4. Start the frontend (Phase 3, React/Vite)
 
 ```bash
 cd frontend
