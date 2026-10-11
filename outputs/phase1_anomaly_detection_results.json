@@ -1,0 +1,49 @@
+{
+  "dataset": "carOBD (eron93br/carOBD) - real Toyota Etios OBD-II logs",
+  "approach": "unsupervised one-class anomaly detection (no real fault labels exist in this dataset)",
+  "train_rows": 239606,
+  "test_rows": 58697,
+  "results": [
+    {
+      "model": "IsolationForest",
+      "synthetic_validation": {
+        "precision": 0.0564,
+        "recall": 0.0464,
+        "f1": 0.0509,
+        "tp": 136,
+        "fp": 2277,
+        "fn": 2798,
+        "tn": 53486
+      },
+      "real_data_anomaly_rate": 0.0407
+    },
+    {
+      "model": "OneClassSVM",
+      "synthetic_validation": {
+        "precision": 0.4503,
+        "recall": 0.5631,
+        "f1": 0.5004,
+        "tp": 1652,
+        "fp": 2017,
+        "fn": 1282,
+        "tn": 53746
+      },
+      "real_data_anomaly_rate": 0.0359
+    },
+    {
+      "model": "LocalOutlierFactor",
+      "synthetic_validation": {
+        "precision": 0.1984,
+        "recall": 0.6329,
+        "f1": 0.3021,
+        "tp": 1857,
+        "fp": 7502,
+        "fn": 1077,
+        "tn": 48261
+      },
+      "real_data_anomaly_rate": 0.1347
+    }
+  ],
+  "selected_model": "OneClassSVM",
+  "note": "synthetic_validation metrics come from injected perturbations used ONLY for validation, not training. They show the model can catch extreme deviations; they do not prove real-world fault detection accuracy."
+}

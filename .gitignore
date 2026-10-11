@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+
+# Environment secrets
+.env
+
+# Data and model artifacts (large, regenerable - see README for how to regenerate)
+data/raw/
+data/processed/
+models/*.joblib
+models/**/*.joblib
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,24 @@
+{
+  "model_name": "LogisticRegression",
+  "uses_scaler": true,
+  "features": [
+    "rpm_mean",
+    "rpm_std",
+    "pedal_mean",
+    "pedal_std",
+    "maf_mean",
+    "maf_std",
+    "maf_min",
+    "maf_max",
+    "maf_negative_rate"
+  ],
+  "label_encoding": {
+    "healthy": 0,
+    "airleak_nox": 1
+  },
+  "window_size_samples": 10,
+  "window_seconds": 5.0,
+  "trained_on": "edgeimpulse/obd-automotive-data (real BMW N53, induced intake air-leak vs healthy)",
+  "input_compatible_with_live_obd2": true,
+  "scope_limitation": "Single vehicle, single healthy/fault session pair. No cross-vehicle or cross-session generalization has been tested."
+}

@@ -1,0 +1,29 @@
+{
+  "vehicle_meta": {
+    "vehicle_id": "demo-vehicle-01",
+    "source": "carOBD sample row (anomaly/behaviour) + edgeimpulse/obd-automotive-data real sample window (fault) - see docstring above"
+  },
+  "anomaly": {
+    "status": "Normal",
+    "raw_decision_score": 8.062290849814772,
+    "method": "OneClassSVM",
+    "input_compatible_with_live_obd2": true
+  },
+  "fault": {
+    "predicted_fault": "Probable Intake Air Leak",
+    "predicted_fault_code": "airleak_nox",
+    "confidence": 0.9990609642302329,
+    "method": "LogisticRegression",
+    "label_source": "real induced fault on a real vehicle (edgeimpulse/obd-automotive-data, BMW N53), not lab-bench or synthetic data",
+    "input_compatible_with_live_obd2": true,
+    "note": "Binary fault-vs-normal classifier using only standard OBD-II PIDs (RPM, accelerator pedal position, MAF). Confidence is the model's own estimated probability, not a diagnostic certainty.",
+    "scope_limitation": "Single vehicle, single healthy/fault session pair. No cross-vehicle or cross-session generalization has been tested."
+  },
+  "driver_behaviour": {
+    "behaviour_profile": "Moderate Intensity",
+    "cluster_id": 0,
+    "method": "KMeans (unsupervised profiling, not a predictive classifier)",
+    "input_compatible_with_live_obd2": true
+  },
+  "schema_version": "1.0"
+}

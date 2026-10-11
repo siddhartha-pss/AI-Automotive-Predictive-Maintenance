@@ -1,0 +1,111 @@
+{
+  "dataset": "edgeimpulse/obd-automotive-data - real BMW (N53 engine), real induced intake air-leak vs healthy, captured live via ELM327 at 2 Hz",
+  "label_source": "real induced fault (physically disconnected MAF sensor/vacuum line on a real vehicle), not synthetic or lab-bench data",
+  "formulation": "binary Fault-vs-Normal (airleak_nox vs healthy) - chosen because this dataset has only one fault condition and one vehicle; exact DTC prediction is not supported by the available data",
+  "windowing": "10 samples (5.0s) per window, non-overlapping",
+  "split_strategy": "temporal (time-ordered) holdout per session - train on the earlier part of each session's timeline, test on the later part. NOT a vehicle-level split (only one vehicle exists in this dataset).",
+  "train_windows": 360,
+  "test_windows": 120,
+  "live_compatible_features": [
+    "rpm_mean",
+    "rpm_std",
+    "pedal_mean",
+    "pedal_std",
+    "maf_mean",
+    "maf_std",
+    "maf_min",
+    "maf_max",
+    "maf_negative_rate"
+  ],
+  "excluded_feature": {
+    "name": "NOx [ppm]",
+    "reason": "Not a standard, broadly-available OBD-II Mode 01 PID on consumer vehicles - would make the model look better while secretly not being live-OBD2-compatible.",
+    "comparison_only_metrics_with_nox": {
+      "accuracy": 0.9833,
+      "macro_precision": 0.9833,
+      "macro_recall": 0.9833,
+      "macro_f1": 0.9833
+    }
+  },
+  "model_comparison": [
+    {
+      "model": "LogisticRegression",
+      "test_metrics": {
+        "accuracy": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    {
+      "model": "RandomForest",
+      "test_metrics": {
+        "accuracy": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    {
+      "model": "XGBoost",
+      "test_metrics": {
+        "accuracy": 0.9833,
+        "macro_precision": 0.9833,
+        "macro_recall": 0.9833,
+        "macro_f1": 0.9833
+      }
+    }
+  ],
+  "selected_model": "LogisticRegression",
+  "final_test_metrics": {
+    "accuracy": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "macro_f1": 1.0
+  },
+  "confusion_matrix": {
+    "labels": [
+      "healthy",
+      "airleak_nox"
+    ],
+    "matrix": [
+      [
+        60,
+        0
+      ],
+      [
+        0,
+        60
+      ]
+    ]
+  },
+  "per_class_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 120.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 120.0
+    }
+  },
+  "input_compatible_with_live_obd2": true,
+  "scope_limitation": "Single vehicle, single healthy/fault session pair. No cross-vehicle or cross-session generalization has been tested."
+}

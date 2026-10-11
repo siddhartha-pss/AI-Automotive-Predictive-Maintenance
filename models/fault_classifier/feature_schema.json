@@ -1,0 +1,13 @@
+{
+  "features": [
+    "rpm_mean",
+    "rpm_std",
+    "pedal_mean",
+    "pedal_std",
+    "maf_mean",
+    "maf_std",
+    "maf_min",
+    "maf_max",
+    "maf_negative_rate"
+  ]
+}
